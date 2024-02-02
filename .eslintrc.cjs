@@ -6,19 +6,18 @@ module.exports = {
     },
     parser: '@typescript-eslint/parser',
     parserOptions: {
-        ecmaVersion: 15,
+        ecmaVersion: 'latest',
         sourceType: 'module',
         project: './tsconfig.json',
     },
     extends: [
-        'plugin:prettier/recommended',
         'eslint:recommended',
+        'plugin:prettier/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
     ],
     plugins: ['@typescript-eslint'],
     rules: {
-        'no-console': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',
@@ -37,6 +36,7 @@ module.exports = {
         '@typescript-eslint/restrict-plus-operands': 'off',
         '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
         '@typescript-eslint/unbound-method': 'off',
+        'no-console': 'off',
         'no-prototype-builtins': 'off',
         'no-inner-declarations': 'off',
         'no-constant-condition': 'off',
@@ -47,8 +47,6 @@ module.exports = {
         'no-empty': 'off',
         'no-irregular-whitespace': 'off',
         'no-control-regex': 'off',
-        'no-useless-escape': 'off',
-        'no-constant-condition': 'off',
         'no-empty-character-class': 'off',
         'prefer-rest-params': 'off',
         'prettier/prettier': [

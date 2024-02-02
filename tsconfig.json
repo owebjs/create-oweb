@@ -29,12 +29,6 @@
         "noUnusedParameters": false,
         "skipLibCheck": true,
         "noEmit": true,
-        "paths": {
-            "@routes/*": ["./src/routes/*.ts"],
-            "@utils/*": ["./src/utils/*.ts"],
-            "@types": ["./src/types.ts"],
-            "@index": ["./src/index.ts"]
-        }
     },
     "exclude": ["node_modules"]
 }
