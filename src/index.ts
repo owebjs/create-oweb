@@ -178,15 +178,6 @@ patch(`{{uWebSocketsEnabled}}`, `${uwebsockets}`);
 patch(`{{imports}}`, imports);
 patch(`{{fastifyPlugins}}`, fastifyPlugins);
 
-function patch(file: string, string: string) {
-    const indexFile = path.join(
-        cwd,
-        `src/index.${options.template === 'typescript' ? 'ts' : 'js'}`,
-    );
-
-    fs.writeFileSync(indexFile, fs.readFileSync(indexFile, 'utf-8').replace(file, string));
-}
-
 await p
     .confirm({
         message: 'Do you want to initialize a git repository?',
@@ -200,8 +191,19 @@ await p
         }
     });
 
+fs.writeFileSync(path.join(process.cwd(), cwd, '.env'), 'HOST=0.0.0.0\nPORT=3000');
+
 console.log(
     `✨ Oweb project has been created. Next steps: ${
-        cwd === '.' ? '' : `\n› cd ${path.relative(process.cwd(), cwd)}`
+        cwd === '.' ? '' : `\n› cd ${cwd}`
     }\n› ${package_manager} ${package_manager === 'yarn' ? 'dev' : 'run dev'}`,
 );
+
+function patch(file: string, string: string) {
+    const indexFile = path.join(
+        cwd,
+        `src/index.${options.template === 'typescript' ? 'ts' : 'js'}`,
+    );
+
+    fs.writeFileSync(indexFile, fs.readFileSync(indexFile, 'utf-8').replace(file, string));
+}
