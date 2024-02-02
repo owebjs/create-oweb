@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
 import * as p from '@clack/prompts';
@@ -68,6 +69,7 @@ const options = await p.group(
             p.multiselect({
                 message: 'Select additional options (use arrow keys/space bar)',
                 required: false,
+                initialValues: [],
                 options: [
                     {
                         value: '@fastify/cors',
@@ -116,7 +118,7 @@ if (options.template === 'typescript') {
     }
 }
 
-p.outro("You're all set! Run the following commands to get started:");
+p.outro('🚀 I copied the proper template and made your project ready 😁');
 
 const { uwebsockets, features, package_manager } = options;
 
@@ -126,9 +128,9 @@ if (!fs.existsSync(cwd)) {
 
 const commands = ['npx degit owebjs/templates/' + options.template + ' --force'];
 
-if (features) {
+if (features.length > 0) {
     commands.push(
-        `${package_manager} ${package_manager == 'npm' ? 'install' : 'add'} -D ${features.join(
+        `${package_manager} ${package_manager == 'yarn' ? 'add' : 'install'} -D ${features.join(
             ' ',
         )}`,
     );
@@ -184,3 +186,22 @@ function patch(file: string, string: string) {
 
     fs.writeFileSync(indexFile, fs.readFileSync(indexFile, 'utf-8').replace(file, string));
 }
+
+await p
+    .confirm({
+        message: 'Do you want to initialize a git repository?',
+        initialValue: false,
+    })
+    .then(async (initGit) => {
+        if (initGit) {
+            await execa('git', ['init'], {
+                cwd: path.relative(process.cwd(), cwd),
+            });
+        }
+    });
+
+console.log(
+    `✨ Oweb project has been created. Next steps:\n cd ${cwd} \n› ${
+        package_manager === 'yarn' ? 'yarn' : package_manager
+    } ${package_manager === 'yarn' ? 'start' : 'run start'}`,
+);
