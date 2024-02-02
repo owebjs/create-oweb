@@ -201,7 +201,7 @@ await p
     });
 
 console.log(
-    `✨ Oweb project has been created. Next steps:\n cd ${cwd} \n› ${
-        package_manager === 'yarn' ? 'yarn' : package_manager
-    } ${package_manager === 'yarn' ? 'start' : 'run start'}`,
+    `✨ Oweb project has been created. Next steps: ${
+        cwd === '.' ? '' : `\n› cd ${path.relative(process.cwd(), cwd)}`
+    }\n› ${package_manager} ${package_manager === 'yarn' ? 'dev' : 'run dev'}`,
 );
