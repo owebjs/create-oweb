@@ -9,8 +9,8 @@
     "http",
     "create-oweb"
   ],
-  "author": "Zukrein",
-  "license": "MIT",
+  "author": "Oweb Authors",
+  "license": "GPL-3.0-or-later",
   "description": "Create a new OwebJS project",
   "files": [
     "dist"
